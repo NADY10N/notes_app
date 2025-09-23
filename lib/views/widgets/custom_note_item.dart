@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:notes/models/note_model.dart';
 import 'package:notes/views/widgets/edit_view_body.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
-
+  const NoteItem({super.key, required this.note});
+  final NoteModel note;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,7 +21,7 @@ class NoteItem extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           // color: const Color(0xffFFCC80),
-          color: Colors.yellow,
+          color: Color(note.color),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
@@ -28,8 +29,8 @@ class NoteItem extends StatelessWidget {
           children: [
             ListTile(
               title: Text(
-                "Flutter Tips ",
-                style: TextStyle(
+                note.title,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 26,
                 ),
@@ -40,7 +41,7 @@ class NoteItem extends StatelessWidget {
                   bottom: 16,
                 ),
                 child: Text(
-                  "Build your career with Nady Alwazah",
+                  note.subTitle,
                   style: TextStyle(
                     color: Colors.black.withOpacity(.5),
                     fontSize: 18,
@@ -49,7 +50,7 @@ class NoteItem extends StatelessWidget {
               ),
               trailing: IconButton(
                   onPressed: () {},
-                  icon: Icon(
+                  icon: const Icon(
                     // FontAwesomeIcons.trash,
                     Icons.delete,
                     color: Colors.black,
@@ -61,7 +62,7 @@ class NoteItem extends StatelessWidget {
                 right: 30,
               ),
               child: Text(
-                "May21 , 2022",
+                note.date,
                 style: TextStyle(
                   color: Colors.black.withOpacity(.4),
                   fontSize: 16,

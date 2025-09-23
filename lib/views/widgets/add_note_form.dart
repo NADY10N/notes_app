@@ -36,7 +36,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
             },
             hint: "Title",
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           CustomTextfield(
@@ -46,7 +46,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
             hint: "Contet",
             maxLines: 5,
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
           BlocBuilder<AddNoteCubit, AddNoteState>(
@@ -62,7 +62,8 @@ class _AddNoteFormState extends State<AddNoteForm> {
                       date: DateTime.now().toString(),
                       color: Colors.blue.value,
                     );
-                    BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                    // BlocProvider.of<AddNoteCubit>(context).addNote(noteModel);
+                    context.read<AddNoteCubit>().addNote(noteModel);
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});
@@ -71,7 +72,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
               );
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
         ],
