@@ -8,11 +8,15 @@ part 'notes_state.dart';
 
 class NotesCubit extends Cubit<NotesState> {
   NotesCubit() : super(NotesInitial());
+
   List<NoteModel>? notes;
   fetchAllNotes() async {
     var notesBox = Hive.box<NoteModel>(kNotesBox);
 
     notes = notesBox.values.toList();
+    notes!.sort(((a, b) {
+      return b.date.compareTo(a.date);
+    }));
     emit(NotesSuccess());
   }
 }
