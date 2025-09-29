@@ -5,8 +5,10 @@ import 'package:notes/models/note_model.dart';
 import 'package:notes/views/widgets/edit_view_body.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key, required this.note});
+  const NoteItem(
+      {super.key, required this.note, this.onUpdateCallbackFunction});
   final NoteModel note;
+  final VoidCallback? onUpdateCallbackFunction;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -59,6 +61,10 @@ class NoteItem extends StatelessWidget {
                   onPressed: () {
                     note.delete();
                     context.read<NotesCubit>().fetchAllNotes();
+                    //!
+                    if (onUpdateCallbackFunction != null) {
+                      onUpdateCallbackFunction?.call();
+                    }
                   },
                   icon: const Icon(
                     // FontAwesomeIcons.trash,
